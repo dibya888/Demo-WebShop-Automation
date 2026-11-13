@@ -1,0 +1,23 @@
+{
+  "name": "demo-webshop-automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dibya888/Demo-WebShop-Automation.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/dibya888/Demo-WebShop-Automation/issues"
+  },
+  "homepage": "https://github.com/dibya888/Demo-WebShop-Automation#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.65.0",
+    "@types/node": "^26.6.6",
+    "allure-commandline": "^2.46.1",
+    "allure-playwright": "^3.14.0"
+  }
+}
