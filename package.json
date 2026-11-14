@@ -29,7 +29,7 @@
     "postman",
     "newman"
   ],
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/dibya888/Demo-WebShop-Automation/issues"
   },
