@@ -1,9 +1,11 @@
+import { expect } from '@playwright/test';
+
 class ProductPage {
     constructor(page) {
         this.page = page;
-        this.computersCategoryLink = page.locator('a[href="/computers"]');
-        this.desktopsSubcategoryLink = page.locator('a[href="/desktops"]');
-        this.productLink = page.locator('a[href="/build-your-own-computer"]');
+        this.computersCategoryLink = page.getByRole('link', { name: 'Computers', exact: true }).first();
+        this.desktopsSubcategoryLink = page.getByRole('heading', { name: 'Desktops' }).getByRole('link',{name: 'Desktops', exact: true});
+        this.productLink = page.getByRole('link', { name: 'Build your own computer', exact: true });
         this.processorDropdown = page.locator('#product_attribute_16_5_4');
         this.ramDropdown = page.locator('#product_attribute_16_6_5');
         this.hddOptions = page.locator('input[id^="product_attribute_16_3_6_"]');
@@ -11,6 +13,7 @@ class ProductPage {
         this.softwareOptions = page.locator('input[id^="product_attribute_16_8_8_"]');
         this.quantityInput = page.locator('#addtocart_16_EnteredQuantity');
         this.addToCartButton = page.locator('#add-to-cart-button-16');
+        this.cartQuantity = page.locator('.cart-qty');
     }
 
     async goto() {
@@ -37,24 +40,31 @@ class ProductPage {
         await this.ramDropdown.selectOption({ value: String(value) });
     }
 
-    async selectHDD(optionId) {
-        await this.page.locator(`#${optionId}`).check();
+    async selectHDD(optionName) {
+        const option = this.page.getByRole('radio', { name: optionName });
+        await option.check();
+        await expect(option).toBeChecked();
     }
 
-    async selectOS(optionId) {
-        await this.page.locator(`#${optionId}`).check();
+    async selectOS(optionName) {
+        const option = this.page.getByRole('radio', { name: optionName });
+        await option.check();
+        await expect(option).toBeChecked();
     }
 
-    async selectSoftware(optionId) {
-        await this.page.locator(`#${optionId}`).check();
+    async selectSoftware(optionName) {
+        const option = this.page.getByRole('checkbox', { name: optionName });
+        await option.check();
+        await expect(option).toBeChecked();
     }
 
     async setQuantity(quantity) {
         await this.quantityInput.fill(String(quantity));
     }
 
-    async addToCart() {
+    async addToCart(expectedQuantity) {
         await this.addToCartButton.click();
+        await expect(this.cartQuantity).toContainText(`(${expectedQuantity})`);
     }
 
 }
