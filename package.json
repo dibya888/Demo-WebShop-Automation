@@ -1,14 +1,34 @@
+
 {
   "name": "demo-webshop-automation",
   "version": "1.0.0",
-  "description": "",
+  "description": "UI and API automation testing of Tricentis Demo Web Shop using Playwright, POM, Postman and Newman.",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test",
+    "test:q1": "playwright test tests/q1-invalid-login.spec.js",
+    "test:q2": "playwright test tests/q2-register-cart.spec.js",
+    "test:q3": "playwright test tests/q3-search-checkout.spec.js",
+    "test:chromium": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+    "report:html": "playwright show-report",
+    "report:allure": "allure generate allure-results --clean -o allure-report",
+    "report:allure:open": "allure open allure-report"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dibya888/Demo-WebShop-Automation.git"
   },
-  "keywords": [],
+  "keywords": [
+    "playwright",
+    "automation-testing",
+    "pom",
+    "api-testing",
+    "postman",
+    "newman"
+  ],
   "type": "commonjs",
   "bugs": {
     "url": "https://github.com/dibya888/Demo-WebShop-Automation/issues"
