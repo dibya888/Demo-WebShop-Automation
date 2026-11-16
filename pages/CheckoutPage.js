@@ -16,6 +16,14 @@ class CheckoutPage {
         this.phoneInput = page.locator('#BillingNewAddress_PhoneNumber');
         this.faxInput = page.locator('#BillingNewAddress_FaxNumber');
         this.continueButton = page.getByRole('button', { name: 'Continue' });
+        this.shippingAddressSection = page.locator('#opc-shipping');
+        this.shippingAddressDropdown = page.locator('#shipping-address-select');
+        this.shippingAddressContinueButton = this.shippingAddressSection.locator('.new-address-next-step-button');
+        this.shippingMethodSection = page.locator('#opc-shipping_method');
+        this.groundShipping = page.locator('#shippingoption_0');
+        this.nextDayAirShipping = page.locator('#shippingoption_1');
+        this.secondDayAirShipping = page.locator('#shippingoption_2');
+        this.shippingMethodContinueButton = this.shippingMethodSection.locator('.shipping-method-next-step-button');
     }
 
     async checkoutAsGuest() {
@@ -34,7 +42,9 @@ class CheckoutPage {
     }
 
     async selectState(stateName) {
-        await this.stateDropdown.selectOption({ label: stateName });
+        if (stateName) {
+            await this.stateDropdown.selectOption({ label: stateName });
+        }
     }
 
     async fillBillingDetails(details) {
@@ -54,6 +64,30 @@ class CheckoutPage {
 
     async continueCheckout() {
         await this.continueButton.click();
+    }
+
+    async selectShippingAddress(address) {
+        await this.shippingAddressDropdown.selectOption({ label: address });
+    }
+
+    async continueShippingAddress() {
+        await this.shippingAddressContinueButton.click();
+    }
+
+    async selectShippingMethod(method) {
+        if (method === 'Ground') {
+            await this.groundShipping.check();
+        } else if (method === 'Next Day Air') {
+            await this.nextDayAirShipping.check();
+        } else if (method === '2nd Day Air') {
+            await this.secondDayAirShipping.check();
+        } else {
+            throw new Error(`Invalid shipping method: ${method}`);
+        }
+    }
+
+    async continueShippingMethod() {
+        await this.shippingMethodContinueButton.click();
     }
 }
 

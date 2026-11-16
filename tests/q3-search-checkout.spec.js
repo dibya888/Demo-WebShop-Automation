@@ -40,4 +40,9 @@ test('Search Product Test', async ({ page }) => {
         phone: '555-1234'
     });
     await checkoutPage.continueCheckout();
+
+    await checkoutPage.continueShippingAddress();
+
+    await checkoutPage.selectShippingMethod('Next Day Air');
+    await checkoutPage.continueShippingMethod();
 });
