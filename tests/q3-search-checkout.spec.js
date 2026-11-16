@@ -45,4 +45,16 @@ test('Search Product Test', async ({ page }) => {
 
     await checkoutPage.selectShippingMethod('Next Day Air');
     await checkoutPage.continueShippingMethod();
+
+    await checkoutPage.selectPaymentMethod('Cash on Delivery');
+    await checkoutPage.continuePaymentMethod();
+
+    await checkoutPage.continuePaymentInfo();
+
+    await checkoutPage.confirmOrder();
+
+    await expect(checkoutPage.orderSuccessMessage).toBeVisible();
+    await expect(checkoutPage.orderNumber).toContainText('Order Number:');
+
+    await checkoutPage.openOrderDetails();
 });

@@ -24,6 +24,19 @@ class CheckoutPage {
         this.nextDayAirShipping = page.locator('#shippingoption_1');
         this.secondDayAirShipping = page.locator('#shippingoption_2');
         this.shippingMethodContinueButton = this.shippingMethodSection.locator('.shipping-method-next-step-button');
+        this.paymentMethodSection = page.locator('#opc-payment_method');
+        this.cashOnDeliveryOption = page.locator('#paymentmethod_0');
+        this.checkMoneyOrderOption = page.locator('#paymentmethod_1');
+        this.creditCardOption = page.locator('#paymentmethod_2');
+        this.purchaseOrderOption = page.locator('#paymentmethod_3');
+        this.paymentMethodContinueButton = this.paymentMethodSection.locator('.payment-method-next-step-button');
+        this.paymentInfoSection = page.locator('#opc-payment_info');
+        this.paymentInfoContinueButton = this.paymentInfoSection.locator('.payment-info-next-step-button');
+        this.confirmOrderSection = page.locator('#opc-confirm_order');
+        this.confirmOrderButton = this.confirmOrderSection.locator('.confirm-order-next-step-button');
+        this.orderSuccessMessage = page.getByText('Your order has been successfully processed!');
+        this.orderNumber = page.locator('ul.details li').first();
+        this.orderDetailsLink = page.getByRole('link', { name: 'Click here for order details.' });
     }
 
     async checkoutAsGuest() {
@@ -88,6 +101,40 @@ class CheckoutPage {
 
     async continueShippingMethod() {
         await this.shippingMethodContinueButton.click();
+    }
+
+    async selectPaymentMethod(method) {
+        if (method === 'Cash on Delivery') {
+            await this.cashOnDeliveryOption.check();
+        } else if (method === 'Check / Money Order') {
+            await this.checkMoneyOrderOption.check();
+        } else if (method === 'Credit Card') {
+            await this.creditCardOption.check();
+        } else if (method === 'Purchase Order') {
+            await this.purchaseOrderOption.check();
+        } else {
+            throw new Error(`Invalid payment method: ${method}`);
+        }
+    }
+
+    async continuePaymentMethod() {
+        await this.paymentMethodContinueButton.click();
+    }
+
+    async continuePaymentInfo() {
+        await this.paymentInfoContinueButton.click();
+    }
+
+    async confirmOrder() {
+        await this.confirmOrderButton.click();
+    }
+
+    async getOrderNumber() {
+        return await this.orderNumber.textContent();
+    }
+
+    async openOrderDetails() {
+        await this.orderDetailsLink.click();
     }
 }
 
