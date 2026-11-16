@@ -14,6 +14,8 @@ class ProductPage {
         this.quantityInput = page.locator('#addtocart_16_EnteredQuantity');
         this.addToCartButton = page.locator('#add-to-cart-button-16');
         this.cartQuantity = page.locator('.cart-qty');
+        this.fictionQuantityInput = page.locator('#addtocart_45_EnteredQuantity');
+        this.fictionAddToCartButton = page.locator('#add-to-cart-button-45');
     }
 
     async goto() {
@@ -64,6 +66,15 @@ class ProductPage {
 
     async addToCart(expectedQuantity) {
         await this.addToCartButton.click();
+        await expect(this.cartQuantity).toContainText(`(${expectedQuantity})`);
+    }
+
+    async setFictionQuantity(quantity) {
+        await this.fictionQuantityInput.fill(String(quantity));
+    }
+
+    async addFictionToCart(expectedQuantity) {
+        await this.fictionAddToCartButton.click();
         await expect(this.cartQuantity).toContainText(`(${expectedQuantity})`);
     }
 
