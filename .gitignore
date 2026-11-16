@@ -9,15 +9,10 @@ node_modules/
 
 # Playwright
 test-results/
-playwright-report/
 playwright/.cache/
 
-# Allure reports
+# Allure test results
 allure-results/
-allure-report/
-
-# HTML reports
-reports/
 
 # Screenshots and test artifacts
 screenshots/
@@ -41,7 +36,6 @@ Desktop.ini
 *.temp
 
 # Playwright
-/playwright-report/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
