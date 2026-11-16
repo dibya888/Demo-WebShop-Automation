@@ -89,13 +89,19 @@ npm run test:all
 
 ## Reporting
 
+Both Playwright HTML and Allure reports are generated for UI test executions. Screenshots are captured and attached to the test reports.
+
 ### Playwright HTML Report
 
-After executing the UI tests, open the HTML report using:
+The HTML report is automatically generated after UI test execution.
+
+Open the report:
 
 ```bash
 npm run report:html
 ```
+
+Report location: `playwright-report/`
 
 ### Allure Report
 
@@ -105,11 +111,20 @@ Generate the Allure report:
 npm run report:allure
 ```
 
-Open the generated report:
+Open the report:
 
 ```bash
 npm run report:allure:open
 ```
+
+Report location: `allure-report/`
+
+### Submitted Reports
+
+Generated HTML and Allure reports are included in the GitHub repository for review.
+
+- Playwright HTML Report: `playwright-report/`
+- Allure Report: `allure-report/`
 
 ## API Test Collection
 
@@ -124,3 +139,9 @@ The collection contains three requests:
 3. **Update User** – Updates the user's name, email, and company name, then validates the response.
 
 The collection can be executed locally using Newman through `npm run test:api`.
+
+### Online Allure Report
+
+View the test execution report online:
+
+[View Allure Report](https://dibya888.github.io/Demo-WebShop-Automation/)
