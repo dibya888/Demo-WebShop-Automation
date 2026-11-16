@@ -3,6 +3,7 @@ import SearchPage from '../pages/SearchPage.js';
 import ProductPage from '../pages/ProductPage.js';
 import CartPage from '../pages/CartPage.js';
 import CheckoutPage from '../pages/CheckoutPage.js';
+import OrderDetailsPage from '../pages/OrderDetailsPage.js';
 
 test('Search Product Test', async ({ page }) => {
     const searchPage = new SearchPage(page);
@@ -54,7 +55,16 @@ test('Search Product Test', async ({ page }) => {
     await checkoutPage.confirmOrder();
 
     await expect(checkoutPage.orderSuccessMessage).toBeVisible();
-    await expect(checkoutPage.orderNumber).toContainText('Order Number:');
+    await expect(checkoutPage.orderNumber).toContainText('Order number:');
 
     await checkoutPage.openOrderDetails();
+
+    const orderDetailsPage = new OrderDetailsPage(page);
+    await expect(orderDetailsPage.pageTitle).toHaveText('Order information');
+    await expect(orderDetailsPage.orderNumber).toContainText('Order #');
+    await expect(orderDetailsPage.orderStatus).toContainText('Pending');
+    await expect(orderDetailsPage.productName).toHaveText('Fiction');
+    await expect(orderDetailsPage.productQuantity).toContainText('10');
+    await expect(orderDetailsPage.productTotal).toContainText('240.00');
+    await expect(orderDetailsPage.orderTotal).toContainText('247.00');
 });
