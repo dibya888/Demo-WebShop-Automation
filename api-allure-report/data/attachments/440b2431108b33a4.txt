@@ -1,0 +1,25 @@
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test("Response is an array", function () {
+    pm.expect(pm.response.json()).to.be.an("array");
+});
+
+pm.test("Users array is not empty", function () {
+    pm.expect(pm.response.json().length).to.be.greaterThan(0);
+});
+
+const users = pm.response.json();
+pm.test("Every users has id, name and email", function () {
+    users.forEach(function(user) {
+        pm.expect(user).to.have.property('id');
+        pm.expect(user).to.have.property('name');
+        pm.expect(user).to.have.property('email');
+    });
+});
+
+const randomIndex = Math.floor(Math.random()*users.length);
+const randomUser = users[randomIndex];
+
+pm.collectionVariables.set("userId",randomUser.id);

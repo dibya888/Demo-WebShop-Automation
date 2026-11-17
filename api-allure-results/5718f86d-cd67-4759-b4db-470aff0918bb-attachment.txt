@@ -1,0 +1,26 @@
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test("Updated User ID matched with saved User ID", function () {
+    const user = pm.response.json();
+    const savedId = pm.collectionVariables.get("userId");
+    pm.expect(user.id).to.eql(Number(savedId));
+});
+
+pm.test("Phone number is not empty", function(){
+    const user = pm.response.json();
+    pm.expect(user.phone).to.not.be.empty;
+});
+
+pm.test("Updated name matches expected name", function () {
+    const user = pm.response.json();
+    const expectedName = pm.collectionVariables.get("updatedName");
+    pm.expect(user.name).to.equal(expectedName);
+});
+
+pm.test("Updated company name matches expected name", function () {
+    const user = pm.response.json();
+    const expectedCompany = pm.collectionVariables.get("updatedCompany");
+    pm.expect(user.company.name).to.eql(expectedCompany);
+});

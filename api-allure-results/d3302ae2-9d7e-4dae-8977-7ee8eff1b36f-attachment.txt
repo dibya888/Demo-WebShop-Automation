@@ -1,0 +1,5 @@
+const timestamp = Date.now();
+
+pm.collectionVariables.set("updatedName", `Test User ${timestamp}`);
+pm.collectionVariables.set("updatedEmail", `testuser${timestamp}@example.com`);
+pm.collectionVariables.set("updatedCompany", `Test Company ${timestamp}`);

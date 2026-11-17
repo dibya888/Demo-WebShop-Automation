@@ -140,8 +140,12 @@ The collection contains three requests:
 
 The collection can be executed locally using Newman through `npm run test:api`.
 
-### Online Allure Report
+## Online Test Reports
 
-View the test execution report online:
+### UI Testing
+[View UI Allure Report](https://dibya888.github.io/Demo-WebShop-Automation/)
 
-[View Allure Report](https://dibya888.github.io/Demo-WebShop-Automation/)
+### API Testing
+[View API Newman HTML Report](https://dibya888.github.io/Demo-WebShop-Automation/api-report/)
+
+[View API Allure Report](https://dibya888.github.io/Demo-WebShop-Automation/api-allure-report/)

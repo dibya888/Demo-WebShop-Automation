@@ -1,0 +1,21 @@
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test("User ID matched with saved ID", function () {
+    const user = pm.response.json();
+    const savedId = pm.collectionVariables.get("userId");
+    pm.expect(user.id).to.eql(Number(savedId));
+});
+
+pm.test("User name isn't empty",function(){
+    const user = pm.response.json();
+    pm.expect(user.name).to.not.be.empty;
+});
+
+pm.test("User email is not empty", function () {
+    const user = pm.response.json();
+    pm.expect(user.email).to.not.be.empty;
+});
+
+pm.collectionVariables.set("userPhone", pm.response.json().phone);
